@@ -1,0 +1,67 @@
+{% extends _layout %}
+
+{% block title %}Ajouter une voiture{% endblock %}
+
+{% block content %}
+<h1 class="blue-text">Voitures</h1>
+
+	<div class="row section">
+
+
+		{{ material_form_start('Voiture', {
+			"title" : "Ajout des critères d'une voiture",
+			"method": "post",
+			"action": "voitures.add",
+		}) }}
+
+
+		<div class="row">
+
+			{{ material_form_input("idv", {
+				"type"  : "text",
+				"label": "IdV",
+				"placeholder":"C1",
+				"class": "validate",
+			}) }}
+
+			{{ material_form_input("prix", {
+				"type"  : "number",
+				"label": "Prix",
+				"class": "validate",
+				"data-error" : "Entrer un nombre",
+			}) }}
+
+			{{ material_form_input("klm", {
+				"type"  : "number",
+				"label": "Kilomètre",
+				"class": "validate",
+				"data-error" : "Entrer un nombre",
+			}) }}
+
+			{{ material_form_input("puissance", {
+				"type"  : "number",
+				"label": "Puissance",
+				"class": "validate",
+				"data-error" : "Entrer un nombre",
+			}) }}
+
+
+		</div>
+
+
+		{{ material_form_error() }}
+
+		{{ material_form_submit("Ajouter", {
+			"class": "col offset-s7 s5 offset-m7 m3 offset-l6 l3",
+			"icon" : "send",
+		}) }}
+
+		{{ material_form_end() }}
+
+	</div>
+
+{% endblock %}
+
+{% block script %}
+	{{ material_form_json() }}
+{% endblock %}

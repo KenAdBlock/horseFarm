@@ -1,0 +1,81 @@
+{% extends _layout %}
+
+{% block title %}Patients{% endblock %}
+
+{% block content %}
+    <h1 class="blue-text">Patients</h1>
+
+    <div class="row section">
+
+
+        {{ material_form_start('Patient', {
+            "title": "Diagnostic",
+            "method": "post",
+            "action": "patients.index",
+        }) }}
+
+
+        <div class="row">
+
+            {{ material_form_select("douleur", {
+
+                "opt": {
+                    "" : "NULL",
+                    "non": "Aucune",
+                    "abdomen": "Abdomen",
+                    "gorge": "Gorge",
+                },
+                "label": "Douleur",
+                "class": "validate",
+            }) }}
+
+            {{ material_form_select("fievre", {
+
+                "opt": {
+                    "" : "NULL",
+                    "non": "Non",
+                    "oui": "Oui",
+                },
+                "label": "Fièvre",
+                "class": "validate",
+            }) }}
+
+
+            {{ material_form_select("toux", {
+
+                "opt": {
+                    "" : "NULL",
+                    "non": "Non",
+                    "oui": "Oui",
+                },
+                "label": "Toux",
+                "class": "validate",
+            }) }}
+
+        </div>
+
+
+        {{ material_form_submit("Diagnostiquer", {
+            "class": "col offset-s7 s5 offset-m7 m3 offset-l6 l3",
+            "icon": "send",
+        }) }}
+
+        {{ material_form_end() }}
+
+            <div class="row">
+                <p>{{ result }}</p>
+            </div>
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('select').material_select();
+
+        });
+    </script>
+{% endblock %}

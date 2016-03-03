@@ -1,0 +1,146 @@
+{% extends _layout %}
+
+{% block title %}Voitures Skylines{% endblock %}
+
+{% block content %}
+
+    {% if score is empty %}
+        <h1 class="blue-text">Voitures</h1>
+        <div class="row section">
+
+
+            {{ material_form_start('Voiture', {
+                "title" : "Déterminer les objets Skylines",
+                "method": "post",
+                "action": "voitures.index",
+            }) }}
+
+
+            <div class="row">
+
+
+                {{ material_form_select("prix", {
+                    "opt" : {
+                        "min" : "Min",
+                        "max" : "Max",
+                    },
+                    "label": "Prix",
+                    "class": "validate",
+                    "parent_class" : "col s4 offset-l3",
+                }) }}
+
+
+                {{ material_form_input("prix_pond", {
+                    "type" : "text",
+                    "label": "Coeff Prix Pond",
+                    "placeholder": "0.5",
+                    "class": "",
+                    "parent_class" : "col s2",
+                }) }}
+
+                {{ material_form_select("klm", {
+                    "opt" : {
+                        "min" : "Min",
+                        "max" : "Max",
+                    },
+                    "label": "Kilomètre",
+                    "class": "validate",
+                    "parent_class" : "col s4 offset-l3",
+                }) }}
+
+
+                {{ material_form_input("klm_pond", {
+                    "type" : "text",
+                    "label": "Coeff Klm Pond",
+                    "placeholder": "0.5",
+                    "class": "",
+                    "parent_class" : "col s2",
+                }) }}
+
+                {{ material_form_select("puissance", {
+                    "opt" : {
+                        "max" : "Max",
+                        "min" : "Min",
+                    },
+                    "label": "Puissance",
+                    "class": "validate",
+                    "parent_class" : "col s4 offset-l3",
+                }) }}
+
+
+                {{ material_form_input("puissance_pond", {
+                    "type" : "text",
+                    "label": "Coeff Puissance Pond",
+                    "placeholder": "0.5",
+                    "class": "",
+                    "parent_class" : "col s2",
+                }) }}
+
+            </div>
+
+
+            {{ material_form_submit("Calculer", {
+                "class": "col offset-s7 s5 offset-m7 m3 offset-l6 l3",
+                "icon" : "send",
+            }) }}
+
+            {{ material_form_end() }}
+
+            <div class="row">
+                <p>{{ result }}</p>
+            </div>
+
+        </div>
+
+    {% else %}
+        <div class="row section">
+            <h1 class="blue-text">Voitures Skylines</h1>
+            <a href="index" class="waves-effect waves-light btn right">
+                <i class="material-icons left">settings_backup_restore</i>
+                Recommencer
+            </a>
+
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th data-field="idv">IdV</th>
+                    <th data-field="prix">Prix</th>
+                    <th data-field="klm">Kilométrage</th>
+                    <th data-field="puissance">Puissance</th>
+                    <th data-field="score">Score</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% for s in score %}
+                    <tr>
+                        <td>{{ s.IdV }}</td>
+                        <td>{{ s.Prix }}</td>
+                        <td>{{ s.Klm }}</td>
+                        <td>{{ s.Puissance }}</td>
+                        <td>{{ s.Score }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+    {% endif %}
+
+
+
+{% endblock %}
+
+
+
+{% block script %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('select').material_select();
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,30 @@
+# Empêche de lister le contenu des dossiers
+ Options -Indexes
+
+# Empêche l'accès aux fichiers .php sauf index.php
+ <Files ~ "[^index]\.php$">
+  Order Allow,Deny
+  Deny from All
+ </Files>
+
+
+# Url Rewriting
+#Options +FollowSymLinks
+RewriteEngine On # Activation de l'url rewriting
+#RewriteCond %{REQUEST_FILENAME} !-f # Si fichier non trouvé
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^([a-zA-Z0-9\-\_\/]+)$ index.php?p=$1 [QSA,L] # Alors, règle de réécriture
+
+
+# Original
+#RewriteRule ^([a-zA-Z0-9\-\_\/]+)$ index.php?p=$1 [L,QSA]
+
+# LASTFAIL
+#RewriteRule ^([^/]*)/?([^/]*)/?([^/]*)/?$ index.php?controller=$1&action=$2&params=$3 [NC,L,QSA]
+
+# OLD
+#RewriteRule ^([a-zA-Z0-9.\-\_\/]+)/([a-zA-Z0-9\-\_\/]*)(?:/([a-zA-Z0-9\-\_\/]*))?$ index.php?controller=$1&action=$2&params=$3 [NC,L,QSA]
+#RewriteRule ^([A-Za-z0-9_.]+)/?$([A-Za-z0-9_]*)/?$ index.php?controller=$1&action=$2&params=$3 [NC,L]
+# ^([-a-z0-9A-Z]?)/([-a-z0-9A-Z]?)(?:/([-a-z0-9A-Z]?))?$

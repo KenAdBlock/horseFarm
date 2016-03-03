@@ -1,0 +1,30 @@
+{% extends _layout %}
+
+{% block title %}Utilisateurs{% endblock %}
+
+{% block content %}
+    <h1>Liste des utilisateurs</h1>
+
+    <table class="responsive-table striped">
+        <thead>
+        <tr>
+            <th data-field="id">Id</th>
+            <th data-field="email">Email</th>
+            <th data-field="password">Password</th>
+            <th data-field="password">Hash</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.hash }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="divider"></div>
+{% endblock %}

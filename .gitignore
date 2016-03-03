@@ -1,0 +1,8 @@
+#configuration jetbrain
+.idea/
+
+#fichier de configuration de la connexion à la base de données
+app/config/config.php
+
+#dossier vendor
+vendor/
